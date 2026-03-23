@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divyanshu — Full Stack Developer & Open-Source Builder</title>
+    <!-- Core Geometry/Custom CSS -->
+    <link rel="stylesheet" href="style.css?v=2024.1">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="dark-mode">
+
+    <!-- 3D Canvas Background (hidden, replaced by sketch synapse) -->
+    <canvas id="webgl-canvas" style="display:none"></canvas>
+    <!-- Sketch Synapse Neural Network -->
+    <canvas id="synapse-canvas"></canvas>
+
+    <!-- Fixed Header -->
+    <header class="fixed-header">
+        <div class="header-left">
+            <span>DIVYANSHU</span>
+        </div>
+        <div class="header-right">
+            <span class="synapse-count" aria-hidden="true"><span id="counter-val">260.485</span> trillion synapses fired
+                while you're here</span>
+            <nav>
+                <a href="DIVU.pdf" download="DIVU.pdf" class="highlight-cv">Download CV</a>
+                <a href="#work">work</a>
+                <a href="#" id="admin-open-btn">Admin</a>
+                <a href="#signal"></a>
+            </nav>
+            <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme"></button>
+        </div>
+    </header>
+
+    <!-- Moving Trace Line -->
+    <div class="trace-line" id="trace-line"></div>
+    <!-- Moving Triangle Pointer -->
+    <div class="sidebar-pointer" id="sidebar-pointer"></div>
+
+    <!-- Fixed Left Sidebar (Mechanical Ruler) -->
+    <aside class="left-sidebar">
+        <!-- The track that slides vertically -->
+        <div class="ruler-track" id="ruler-track"></div>
+
+        <!-- Navigation labels that highlight -->
+        <div class="sidebar-labels">
+            <span class="label-about">ABOUT</span>
+            <span class="label-stack">SKILL</span>
+            <span class="label-work">PROJECTS</span>
+            <span class="label-philosophy">CERTIFICATE</span>
+            <span class="label-experience">EDUCATION</span>
+            <span class="label-contact">CONTACT</span>
+        </div>
+        <div class="equalizer">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </aside>
+
+    <!-- Let's Talk Fixed Button -->
+    <div class="fixed-action">
+        <div class="lets-talk-btn" onclick="document.getElementById('contact-modal').classList.add('active')">LET'S TALK
+        </div>
+    </div>
+
+    <!-- Contact Modal Overlay -->
+    <div class="contact-modal" id="contact-modal" onclick="if(event.target === this) this.classList.remove('active')">
+        <div class="modal-content light-theme-modal">
+            <button type="button" class="close-modal override-close"
+                onclick="document.getElementById('contact-modal').classList.remove('active')">&times;</button>
+
+            <div class="modal-header">
+                <span class="contact-info-label">/ Contact Information</span>
+                <h1>Let's get <span class="orange-text">started</span></h1>
+                <h2>How can I help?</h2>
+            </div>
+
+            <form action="https://formsubmit.co/divyanshusahu@gmail.com" method="POST" class="contact-form custom-form">
+                <input type="hidden" name="_subject" value="New Portfolio Contact Submission!">
+
+                <div class="form-group under-line">
+                    <label for="name">Your Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="John Smith *">
+                </div>
+
+                <div class="form-group under-line">
+                    <label for="phone">Your Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="+1 (555) 000-0000 *">
+                </div>
+
+                <div class="form-group under-line">
+                    <label for="email">Your E-mail Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="mail@example.com *">
+                </div>
+
+                <div class="form-group under-line">
+                    <label for="message">More info *</label>
+                    <textarea id="message" name="message" required rows="2"
+                        placeholder="What's this about? Project, hiring, or opportunity? *"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn orange-submit">Submit <span class="arrow">&gt;</span></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scrollable Content Layer -->
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+
+            <section id="hero" class="panel">
+                <h1 class="hero-title">I build intelligence that stays<br>where it belongs.</h1>
+                <div class="hero-bottom">
+                    <div class="subtitle">
+                        <p>Divyanshu</p>
+                        <p class="role">Full Stack Developer / Open-source builder</p>
+                    </div>
+                    <div class="scroll-down">
+                        <p>SCROLL DOWN</p>
+                        <div class="mouse-icon"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEW SECTION: About ME -->
+            <section id="about" class="panel">
+                <div class="section-content about-content">
+                    <h3 class="section-title reveal-text" style="margin-bottom: 3rem;">ABOUT ME</h3>
+                    <div class="typewriter-container" style="min-height: 250px;">
+                        <p>Computer Science student passionate about building modern web applications and digital
+                            experiences.</p>
+                        <br>
+                        <p>Skilled in JavaScript, React, PHP, Laravel, and MySQL, with a strong interest in full-stack
+                            development and AI integration.</p>
+                        <br>
+                        <p>I enjoy solving real-world problems through code and continuously learning new technologies
+                            to improve my development skills.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEW SECTION: Stack Cloud -->
+            <section id="stack" class="panel">
+                <div class="section-content">
+                    <h3 class="section-title reveal-text">SKILL</h3>
+                    <div class="stack-cloud">
+                        <span class="keyword s1 reveal-item" data-hover-img="" data-hover-title="JavaScript"
+                            data-hover-desc="Core front-end and back-end logic."
+                            style="font-weight: 700; opacity: 1;">JavaScript</span>
+                        <span class="keyword s4 reveal-item" data-hover-img="" data-hover-title="Java (Basic)"
+                            data-hover-desc="Strongly typed OOP principles."
+                            style="font-weight: 300; opacity: 0.5;">Java</span>
+                        <span class="keyword s3 reveal-item" data-hover-img="" data-hover-title="Laravel"
+                            data-hover-desc="Robust PHP backend architecture."
+                            style="font-weight: 500; opacity: 0.8;">Laravel</span>
+                        <span class="keyword s4 reveal-item" data-hover-img="" data-hover-title="Python (Basic)"
+                            data-hover-desc="Data processing and scripting."
+                            style="font-weight: 300; opacity: 0.4;">Python</span>
+                        <span class="keyword s1 reveal-item" data-hover-img="" data-hover-title="React"
+                            data-hover-desc="Component-based UI engineering."
+                            style="font-weight: 600; opacity: 0.9;">React</span>
+                        <span class="keyword s4 reveal-item" data-hover-img="" data-hover-title="C++ (Basic)"
+                            data-hover-desc="Hardware optimized logic."
+                            style="font-weight: 300; opacity: 0.3;">C++</span>
+                        <span class="keyword s2 reveal-item" data-hover-img="" data-hover-title="MySQL"
+                            data-hover-desc="Scalable relational design."
+                            style="font-weight: 500; opacity: 0.7;">MySQL</span>
+                        <span class="keyword s3 reveal-item" data-hover-img="" data-hover-title="PHP"
+                            data-hover-desc="Server-side data handling."
+                            style="font-weight: 400; opacity: 0.8;">PHP</span>
+                        <span class="keyword s2 reveal-item" data-hover-img="" data-hover-title="Tailwind CSS"
+                            data-hover-desc="Utility-first styling system."
+                            style="font-weight: 500; opacity: 0.6;">Tailwind CSS</span>
+                        <span class="keyword s3 reveal-item" data-hover-img="" data-hover-title="Git & GitHub"
+                            data-hover-desc="Version control workflows." style="font-weight: 400; opacity: 0.7;">Git &
+                            GitHub</span>
+                        <span class="keyword s2 reveal-item" data-hover-img="" data-hover-title="Soft Skills"
+                            data-hover-desc="Leadership and technical communication."
+                            style="font-weight: 500; opacity: 0.8;">Soft Skills</span>
+                    </div>
+
+                    <div class="deck-container reveal-item">
+                        <div class="card-deck" id="skill-deck">
+                            <div class="deck-card">
+                                <div class="deck-card-inner">
+                                    <div class="deck-card-front"></div>
+                                    <div class="deck-card-back">
+                                        <img src="" alt="" class="card-image">
+                                        <h4>Problem Solving</h4>
+                                        <p>Over 500+ algorithmic challenges solved with optimized efficiency.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="deck-card">
+                                <div class="deck-card-inner">
+                                    <div class="deck-card-front"></div>
+                                    <div class="deck-card-back">
+                                        <img src="" alt="" class="card-image">
+                                        <h4>System Design</h4>
+                                        <p>Architecting scalable and resilient microservice architectures.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="deck-card">
+                                <div class="deck-card-inner">
+                                    <div class="deck-card-front"></div>
+                                    <div class="deck-card-back">
+                                        <img src="" alt="" class="card-image">
+                                        <h4>Agile Leader</h4>
+                                        <p>Leading rapid sprints and cross-functional teams to delivery.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="work" class="panel projects-section">
+                <div class="section-content">
+                    <h3 class="section-title reveal-text">FEATURED WORK</h3>
+
+                    <div class="project-card reveal-item">
+                        <div class="bg-number" data-speed="0.8">01</div>
+                        <div class="project-info">
+                            <div class="project-meta"><span>[PRJ-001]</span><span>2024</span></div>
+                            <h2>Smart Trip Planner</h2>
+                            <h4 class="project-subtitle">AI-powered travel planning & automation</h4>
+                            <p>AI-powered travel planning application that generates personalized trip itineraries based
+                                on user preferences.
+
+                                Features include weather integration, smart recommendations, and Google Calendar
+                                scheduling for automated trip planning.</p>
+                            <div class="project-tech"><span>React</span> &middot; <span>Python</span> &middot;
+                                <span>OpenAI</span> &middot; <span>Tailwind v4</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="svg-divider reveal-item" style="margin: 4rem 0;">
+                        <svg viewBox="0 0 100 20" preserveAspectRatio="none">
+                            <path d="M0,10 Q25,20 50,10 T100,10" fill="none" class="stroke-path"
+                                style="stroke: rgba(255,255,255,0.1); stroke-width: 1;" />
+                        </svg>
+                    </div>
+
+                    <div class="project-card reveal-item">
+                        <div class="bg-number" data-speed="0.8">02</div>
+                        <div class="project-info">
+                            <div class="project-meta"><span>[PRJ-002]</span><span>2023</span></div>
+                            <h2>Disaster Portal</h2>
+                            <h4 class="project-subtitle">Community incident management framework</h4>
+                            <p>A full-stack web platform that allows users to report disaster incidents in real time
+                                with location tracking and media uploads.
+
+                                Designed to improve access to emergency information and support community response
+                                during critical situations.</p>
+                            <div class="project-tech"><span>PHP</span> &middot; <span>Laravel</span> &middot;
+                                <span>MySQL</span> &middot; <span>JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PHILOSOPHY SECTION: Interactive Canvas Style -->
+            <section id="philosophy" class="panel">
+                <div class="section-content">
+                    <h3 class="section-title reveal-text">CERTIFICATE</h3>
+
+                    <!-- Interactive Canvas Curve Navigator -->
+                    <div class="phil-canvas-wrap reveal-item">
+                        <canvas id="phil-canvas"></canvas>
+                    </div>
+
+                    <!--  Text Display -->
+                    <div class="phil-text-display reveal-item" id="phil-display">
+                        <h2 id="phil-title"><a href="#" target="_blank">• Privacy and Security in Online social media by
+                                NPTEL</a></h2>
+                        <p id="phil-desc">Gained knowledge of privacy risks, data protection, and security practices in
+                            online social media platforms.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="experience" class="panel">
+                <div class="section-content">
+                    <h3 class="section-title reveal-text">EDUCATION</h3>
+                    <div class="timeline">
+                        <div class="timeline-item reveal-item">
+                            <div class="node">01</div>
+                            <div class="item-content">
+                                <h4>Lovely Professional University</h4>
+                                <p> Bachelor of Computer Science and Engineering(Lateral Entry)</p>
+                                <div class="tags"><span class="tag">Aug' 24 - Aug' 27</span><span class="tag">CGPA: 7.3
+                                    </span><span class="tag">Phagwara, Punjab</span></div>
+                            </div>
+                        </div>
+                        <div class="timeline-item reveal-item">
+                            <div class="node">02</div>
+                            <div class="item-content">
+                                <h4>Rajkiya Polytechnic College </h4>
+                                <p>Diploma in Mechanical Engineering
+                                </p>
+                                <div class="tags"><span class="tag">Apr' 20 - Mar' 23</span><span
+                                        class="tag">Percentage: 76.4%</span><span class="tag">Faizabad Uttar
+                                        Pradesh</span></div>
+                            </div>
+                        </div>
+                        <div class="timeline-item reveal-item">
+                            <div class="node">03</div>
+                            <div class="item-content">
+                                <h4>Anil Saraswati Vidya Mandir </h4>
+                                <p>Intermediate (PCM)
+                                </p>
+                                <div class="tags"><span class="tag">Apr' 19 - Mar' 20</span><span
+                                        class="tag">Percentage: 76.4%</span><span class="tag">Faizabad Uttar
+                                        Pradesh</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEW SECTION: Contact -->
+            <section id="contact" class="panel">
+                <div class="section-content">
+                    <h3 class="section-title reveal-text">CONTACT</h3>
+                    <div class="projects-grid">
+                        <div class="project-card reveal-item" style="border: none; background: transparent;">
+                            <style>
+                                .contact-link {
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 0.8rem;
+                                    color: inherit;
+                                    text-decoration: none;
+                                    transition: transform 0.3s ease, opacity 0.3s ease;
+                                    padding: 0.5rem 0;
+                                    font-family: inherit;
+                                }
+
+                                .contact-link:hover {
+                                    opacity: 0.7;
+                                    transform: translateX(10px);
+                                    color: var(--text-primary);
+                                }
+                            </style>
+                            <div class="bg-number">✉</div>
+                            <div class="project-content">
+                                <div class="project-meta"><span>[CNT-001]</span><span>LIVE</span></div>
+                                <h2>Get In Touch</h2>
+                                <h4 class="project-subtitle">Direct communication channels</h4>
+                                <p style="margin-top: 1.5rem; margin-bottom: 0;">
+                                    <a href="mailto:divyanshusahu@gmail.com" class="contact-link">📧 Email</a>
+                                    <a href="https://github.com/divu0609" target="_blank" class="contact-link">💻
+                                        GitHub</a>
+                                    <a href="https://www.linkedin.com/in/divyanshu-sahu-98104916" target="_blank"
+                                        class="contact-link">🔗 LinkedIn</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel footer-bottom"
+                style="position: relative; padding: 10rem 0 5rem 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end;">
+                <!-- Relocated Massive 3D Teardrop Background -->
+                <div id="electron-container"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: auto;">
+                </div>
+
+                <div class="footer-content"
+                    style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem; width: 100%; pointer-events: none; gap: 1rem;">
+
+                    <p class="role-logo reveal-item"
+                        style="font-family: sans-serif; font-weight: 600; color: var(--text-primary); font-size: 1.25rem; margin: 0; pointer-events: auto;">
+                        Divyanshu</p>
+
+                    <p class="chat reveal-item"
+                        style="color: var(--text-muted); font-size: 1rem; margin: 3rem 0; font-family: sans-serif; pointer-events: auto; opacity: 0.8;">
+                        If you're building something that matters, let's talk.</p>
+
+                    <a href="mailto:hello@divyanshu.com" class="email-link reveal-item"
+                        style="color: var(--text-primary); font-family: monospace; font-size: clamp(1.8rem, 4vw, 2.8rem); text-decoration: none; font-weight: 500; letter-spacing: normal; cursor: pointer; pointer-events: auto; margin-bottom: 4rem; transition: opacity var(--theme-transition);">
+                        divyanshusahu71@gmail.com</a>
+
+                    <div class="social-links reveal-text"
+                        style="display: flex; gap: 2.5rem; font-family: sans-serif; font-weight: 500; font-size: 0.85rem; color: rgba(255,255,255,0.3); pointer-events: auto;">
+                        <a href="#" style="color: inherit; text-decoration: none; transition: color 0.3s;">GitHub</a>
+                        <a href="#" style="color: inherit; text-decoration: none; transition: color 0.3s;">X</a>
+                        <a href="DIVU.pdf" download="DIVU.pdf"
+                            style="color: inherit; text-decoration: none; transition: color 0.3s;">Download
+                            CV</a>
+                        <a href="#" style="color: inherit; text-decoration: none; transition: color 0.3s;">LinkedIn</a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js"></script>
+    <!-- Momentum Scroll -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+
+    <!-- Certificate Preview Overlay -->
+    <div class="cert-preview-overlay" id="cert-preview-overlay"
+        onclick="if(event.target === this) this.classList.remove('active')">
+        <div class="cert-preview-container">
+            <button type="button" class="cert-close-btn"
+                onclick="document.getElementById('cert-preview-overlay').classList.remove('active')">&times;</button>
+            <iframe id="cert-preview-frame" src="" frameborder="0"></iframe>
+            <img id="cert-preview-img" src="" alt="Certificate" style="display:none;" />
+        </div>
+    </div>
+
+    <!-- Custom Scripts -->
+    <script src="admin.js"></script>
+    <script src="script.js?v=2024.1"></script>
+    <script src="synapse.js"></script>
+</body>
+
+</html>
