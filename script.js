@@ -899,7 +899,7 @@ function initPhilCanvas() {
         if (savedData && savedData['certificates'] && savedData['certificates'].length > 0) {
             points = savedData['certificates'];
         }
-    } catch(e) {}
+    } catch (e) { }
 
     if (points.length === 0) {
         points = [
@@ -1020,7 +1020,7 @@ function initPhilCanvas() {
             ctx.moveTo(nodes[0].x, nodes[0].y);
             for (let i = 0; i < nodes.length - 1; i++) {
                 const current = nodes[i];
-                const next = nodes[i+1];
+                const next = nodes[i + 1];
                 const midX = (current.x + next.x) / 2;
                 const midY = Math.min(current.y, next.y) - H * 0.25;
                 ctx.quadraticCurveTo(midX, midY, next.x, next.y);
@@ -1118,4 +1118,64 @@ function initPhilCanvas() {
     document.getElementById('theme-toggle')?.addEventListener('click', () => {
         setTimeout(draw, 50);
     });
+}
+
+// ==========================================
+// EMAILJS CONTACT FORM HANDLER
+// ==========================================
+function sendEmail(event) {
+    event.preventDefault();
+
+    // ⬇️ Replace these with your actual EmailJS values
+    const SERVICE_ID  = 'service_7cjfj7g';
+    const TEMPLATE_ID = 'template_pdxbmun';
+    // PUBLIC_KEY is set in index.html (emailjs.init block)
+
+    const form      = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const statusDiv = document.getElementById('form-status');
+
+    // --- Pre-flight: catch unfilled placeholders immediately ---
+    if (TEMPLATE_ID === 'YOUR_TEMPLATE_ID') {
+        statusDiv.style.display = 'block';
+        statusDiv.style.color   = '#f97316';
+        statusDiv.innerText     = '⚠️ Config missing: Open script.js and set your TEMPLATE_ID from emailjs.com/admin/templates';
+        return;
+    }
+    submitBtn.innerHTML = 'Sending... <span class="arrow">⏳</span>';
+    statusDiv.style.display = 'none';
+
+    // Build template params from form fields
+    const templateParams = {
+        from_name : form.from_name.value,
+        reply_to  : form.reply_to.value,
+        phone     : form.phone.value,
+        message   : form.message.value,
+    };
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+        .then(() => {
+            // Success
+            statusDiv.style.display = 'block';
+            statusDiv.style.color   = '#22c55e';
+            statusDiv.innerText     = '✅ Message sent! I will get back to you soon.';
+            form.reset();
+            submitBtn.disabled      = false;
+            submitBtn.innerHTML     = 'Submit <span class="arrow">&gt;</span>';
+            // Auto close modal after 2.5s
+            setTimeout(() => {
+                document.getElementById('contact-modal')?.classList.remove('active');
+                statusDiv.style.display = 'none';
+            }, 2500);
+        })
+        .catch((err) => {
+            // Show the real error so you know what went wrong
+            const errText = err?.text || err?.message || JSON.stringify(err);
+            console.error('EmailJS error:', errText);
+            statusDiv.style.display = 'block';
+            statusDiv.style.color   = '#ef4444';
+            statusDiv.innerText     = `❌ Error: ${errText}`;
+            submitBtn.disabled      = false;
+            submitBtn.innerHTML     = 'Submit <span class="arrow">&gt;</span>';
+        });
 }
