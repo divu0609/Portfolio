@@ -1,0 +1,75 @@
+{
+  "title": "Divyanshu — Full Stack Developer & Open-Source Builder",
+  "about": "Computer Science student passionate about building modern web applications and digital experiences.\n\nSkilled in JavaScript, React, PHP, Laravel, and MySQL, with a strong interest in full-stack development and AI integration.\n\nI enjoy solving real-world problems through code and continuously learning new technologies to improve my development skills.",
+  "skills": [
+    { "name": "JavaScript", "weight": "s1", "fontWeight": 700, "opacity": 1 },
+    { "name": "Java", "weight": "s4", "fontWeight": 300, "opacity": 0.5 },
+    { "name": "Laravel", "weight": "s3", "fontWeight": 500, "opacity": 0.8 },
+    { "name": "Python", "weight": "s4", "fontWeight": 300, "opacity": 0.4 },
+    { "name": "React", "weight": "s1", "fontWeight": 600, "opacity": 0.9 },
+    { "name": "C++", "weight": "s4", "fontWeight": 300, "opacity": 0.3 },
+    { "name": "MySQL", "weight": "s2", "fontWeight": 500, "opacity": 0.7 },
+    { "name": "PHP", "weight": "s3", "fontWeight": 400, "opacity": 0.8 },
+    { "name": "Tailwind CSS", "weight": "s2", "fontWeight": 500, "opacity": 0.6 },
+    { "name": "Git & GitHub", "weight": "s3", "fontWeight": 400, "opacity": 0.7 },
+    { "name": "Soft Skills", "weight": "s2", "fontWeight": 500, "opacity": 0.8 }
+  ],
+  "projects": [
+    {
+      "id": "PRJ-001",
+      "year": "2024",
+      "title": "Smart Trip Planner",
+      "subtitle": "AI-powered travel planning & automation",
+      "description": "AI-powered travel planning application that generates personalized trip itineraries based on user preferences.\n\nFeatures include weather integration, smart recommendations, and Google Calendar scheduling for automated trip planning.",
+      "tech": ["React", "Python", "OpenAI", "Tailwind v4"],
+      "github": "https://github.com/divu0609/smart-trip-planner.git"
+    },
+    {
+      "id": "PRJ-002",
+      "year": "2023",
+      "title": "Disaster Portal",
+      "subtitle": "Community incident management framework",
+      "description": "A full-stack web platform that allows users to report disaster incidents in real time with location tracking and media uploads.\n\nDesigned to improve access to emergency information and support community response during critical situations.",
+      "tech": ["PHP", "Laravel", "MySQL", "JavaScript"],
+      "github": "https://github.com/divu0609/Disaster_managment.git"
+    }
+  ],
+  "certificates": [
+    {
+      "title": "Privacy and Security in Online Social Media by NPTEL",
+      "description": "Gained knowledge of privacy risks, data protection, and security practices in online social media platforms.",
+      "file": ""
+    }
+  ],
+  "education": [
+    {
+      "node": "01",
+      "institution": "Lovely Professional University",
+      "degree": "Bachelor of Computer Science and Engineering (Lateral Entry)",
+      "period": "Aug' 24 - Aug' 27",
+      "score": "CGPA: 7.3",
+      "location": "Phagwara, Punjab"
+    },
+    {
+      "node": "02",
+      "institution": "Rajkiya Polytechnic College",
+      "degree": "Diploma in Mechanical Engineering",
+      "period": "Apr' 20 - Mar' 23",
+      "score": "Percentage: 76.4%",
+      "location": "Faizabad, Uttar Pradesh"
+    },
+    {
+      "node": "03",
+      "institution": "Anil Saraswati Vidya Mandir",
+      "degree": "Intermediate (PCM)",
+      "period": "Apr' 19 - Mar' 20",
+      "score": "Percentage: 76.4%",
+      "location": "Faizabad, Uttar Pradesh"
+    }
+  ],
+  "contact": {
+    "email": "divyanshusahu71@gmail.com",
+    "github": "https://github.com/divu0609",
+    "linkedin": "https://www.linkedin.com/in/divyanshu-sahu-98104916"
+  }
+}

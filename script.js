@@ -51,6 +51,36 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     });
 
+    // PAPER SCROLL UNROLL + ROLL BACK ANIMATION
+    gsap.utils.toArray('.paper-scroll-card').forEach(card => {
+        // Ensure transform-origin is locked to top-center for authentic unroll
+        gsap.set(card, { transformOrigin: 'top center' });
+
+        // Phase 1 – scaleY + rotateX (the physical unroll, scrub-linked)
+        gsap.fromTo(card,
+            {
+                scaleY: 0,
+                rotateX: 22,
+                opacity: 0,
+                boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+            },
+            {
+                scaleY: 1,
+                rotateX: 0,
+                opacity: 1,
+                ease: 'power3.out',
+                boxShadow: '0 28px 60px rgba(0,0,0,0.38)',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 88%',     // Begin unrolling as card enters view
+                    end:   'top 32%',     // Fully unrolled when top hits ~1/3 screen
+                    scrub: 1.2,           // Fraction-second lag for silky smooth feel
+                    markers: false,
+                }
+            }
+        );
+    });
+
     // Custom Scroll Mechanics for Hero Exit & Sidebar Entry
     // 1. Blur and fade the Hero text
     gsap.to('.hero-title, .subtitle', {

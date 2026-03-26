@@ -459,6 +459,200 @@ a:hover {
     }
 }
 
+/* --- PAPER SCROLL UNROLL EFFECT --- */
+.paper-scroll-zone {
+    background: radial-gradient(ellipse at 60% 0%, rgba(72, 56, 28, 0.55) 0%, rgba(4, 11, 29, 0.97) 70%);
+    padding: 4.5rem 0 6rem;
+    border-radius: 1.4rem;
+    box-shadow: 0 2px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,220,140,0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle warm vignette overlay */
+.paper-scroll-zone::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(255,160,50,0.04) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.paper-scroll-wrapper {
+    perspective: 1600px;
+    perspective-origin: 50% -10%;
+    width: min(100%, 820px);
+    margin: 0 auto;
+    padding: 0.5rem 1.5rem 1.5rem;
+}
+
+/* The animated card itself */
+.paper-scroll-card {
+    transform-origin: top center;
+    /* Parchment base — layered gradients for warmth + subtle grain */
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E"),
+        linear-gradient(160deg, #fdf3df 0%, #f5e6c8 40%, #eddcb4 100%);
+    color: #1e1d1b;
+    border-radius: 16px;
+    /* Shadow starts minimal, deepens as card unrolls (animated by GSAP) */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+    padding: clamp(1.5rem, 3vw, 2.8rem) clamp(1.5rem, 3vw, 3rem) clamp(1.8rem, 3vw, 3rem);
+    border: 1px solid rgba(174, 138, 70, 0.45);
+    /* Start state: collapsed and rotated — GSAP animates these */
+    transform: scaleY(0) rotateX(22deg);
+    opacity: 0;
+    position: relative;
+    will-change: transform, opacity, box-shadow;
+    /* Internal edge highlight */
+    outline: 1px solid rgba(255,235,170,0.35);
+    outline-offset: -6px;
+}
+
+/* Decorative tape strip at top of card */
+.paper-tape {
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-1.5deg);
+    width: 80px;
+    height: 22px;
+    background: rgba(255, 230, 140, 0.55);
+    border-radius: 3px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.18);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+/* Card header layout: icon + text + stamp */
+.paper-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.1rem;
+    margin-bottom: 0;
+    position: relative;
+}
+
+.paper-card-icon {
+    font-size: 2.2rem;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.paper-card-label {
+    font-family: monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    color: #7a5c28;
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+}
+
+.paper-card-title {
+    font-size: clamp(1.25rem, 2.8vw, 1.75rem);
+    font-weight: 700;
+    color: #1e1005;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0;
+}
+
+/* Rotated stamp badge top-right */
+.paper-stamp {
+    margin-left: auto;
+    flex-shrink: 0;
+    border: 2.5px solid rgba(180, 50, 20, 0.6);
+    border-radius: 6px;
+    color: rgba(180, 50, 20, 0.65);
+    font-family: monospace;
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-align: center;
+    padding: 0.3rem 0.5rem;
+    transform: rotate(8deg);
+    line-height: 1.4;
+    box-shadow: inset 0 0 0 1px rgba(180, 50, 20, 0.15);
+    background: rgba(255,80,30,0.04);
+    align-self: center;
+}
+
+/* Horizontal ruled line under header */
+.paper-rule {
+    height: 1px;
+    margin: 1.2rem 0 1.4rem;
+    background: linear-gradient(90deg, transparent, rgba(120, 90, 30, 0.35) 15%, rgba(120, 90, 30, 0.35) 85%, transparent);
+    position: relative;
+}
+.paper-rule::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 8%;
+    right: 8%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(120,90,30,0.12) 20%, rgba(120,90,30,0.12) 80%, transparent);
+}
+
+/* Main body text */
+.paper-card-desc {
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    font-weight: 400;
+    color: #2f2a20;
+    line-height: 1.75;
+    margin-bottom: 1.6rem;
+}
+
+.paper-card-desc strong {
+    color: #1a1005;
+    font-weight: 700;
+}
+
+/* Tech tag chips */
+.paper-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.paper-tags span {
+    font-family: monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    background: rgba(120, 80, 20, 0.12);
+    color: #6b4410;
+    border: 1px solid rgba(120, 80, 20, 0.28);
+    border-radius: 20px;
+    padding: 0.28rem 0.75rem;
+    font-weight: 600;
+    transition: background 0.25s;
+}
+
+.paper-tags span:hover {
+    background: rgba(120, 80, 20, 0.22);
+}
+
+@media (max-width: 900px) {
+    .panel {
+        padding: 0 5% 0 5%;
+    }
+
+    .paper-scroll-zone {
+        padding: 3.5rem 0.5rem 4.5rem;
+    }
+
+    .paper-scroll-card {
+        padding: 1.4rem 1.25rem 1.6rem;
+    }
+
+    .paper-stamp {
+        display: none;
+    }
+}
+
+
 /* About Section */
 .about-content {
     display: flex;
@@ -762,6 +956,83 @@ a:hover {
     border: none;
 }
 
+/* ── Project Box (card wrapper with border + bg) ── */
+.project-box {
+    position: relative;
+    width: 100%;
+    border-radius: 16px;
+    padding: 2.5rem 3rem;
+    transition:
+        background var(--theme-transition),
+        border-color var(--theme-transition),
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+    overflow: hidden;
+}
+
+.project-box:hover {
+    transform: translateY(-4px);
+}
+
+body.dark-mode .project-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .project-box:hover {
+    background: rgba(255, 255, 255, 0.055);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+}
+
+body.light-mode .project-box {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.09);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+}
+
+body.light-mode .project-box:hover {
+    background: #fafafa;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* Accent top-edge line that animates on hover */
+.project-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 16px 16px 0 0;
+}
+
+.project-box:hover::before {
+    transform: scaleX(1);
+}
+
+/* Inner .project-card loses its own padding since .project-box handles it */
+.project-box .project-card {
+    padding: 0;
+}
+
+/* Divider between boxes */
+.project-box-divider {
+    width: 60%;
+    height: 1px;
+    margin: 2.5rem auto;
+    background: linear-gradient(90deg, transparent, var(--sidebar-line) 30%, var(--sidebar-line) 70%, transparent);
+    transition: background var(--theme-transition);
+}
+
+
+
 .bg-number {
     display: block;
     position: absolute;
@@ -863,6 +1134,90 @@ a:hover {
 .github-link:hover svg {
     fill: #fff;
 }
+
+/* Description text box — gives visible contrast in both dark & light mode */
+.project-desc-box {
+    margin: 0.6rem 0 0.4rem;
+    padding: 1rem 1.25rem;
+    border-left: 2px solid var(--accent);
+    background: var(--bg-num-color);
+    border-radius: 0 8px 8px 0;
+    transition: background var(--theme-transition), border-color var(--theme-transition);
+}
+
+/* Dark mode: slightly tinted dark box */
+body.dark-mode .project-desc-box {
+    background: rgba(255, 255, 255, 0.04);
+    border-left-color: var(--accent);
+}
+
+/* Light mode: warm off-white box */
+body.light-mode .project-desc-box {
+    background: rgba(0, 0, 0, 0.04);
+    border-left-color: var(--accent);
+}
+
+.project-desc-box p {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--text-primary);   /* override the default --text-muted so it's always readable */
+    margin: 0;
+    max-width: 700px;
+    font-weight: 400;
+    transition: color var(--theme-transition);
+}
+
+/* GitHub button in project cards — aliases .github-link with same theme support */
+.project-github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+    align-self: flex-start;
+    color: var(--text-primary);
+    text-decoration: none;
+    border: 1px solid var(--sidebar-line);
+    background: var(--bg-num-color);
+    padding: 0.6rem 1.1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.88rem;
+    font-family: monospace;
+    letter-spacing: 0.04em;
+    margin-top: 1.1rem;
+    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+
+body.dark-mode .project-github-link {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.12);
+    color: var(--text-primary);
+}
+
+body.light-mode .project-github-link {
+    background: rgba(0,0,0,0.04);
+    border-color: rgba(0,0,0,0.14);
+    color: var(--text-primary);
+}
+
+.project-github-link svg {
+    fill: var(--text-primary);
+    flex-shrink: 0;
+    transition: fill 0.25s ease;
+}
+
+.project-github-link:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff !important;
+    transform: translateX(4px);
+}
+
+.project-github-link:hover svg {
+    fill: #fff;
+}
+
 
 /* SVG Divider */
 .svg-divider {
